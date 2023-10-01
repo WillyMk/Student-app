@@ -1,5 +1,6 @@
 package com.example.schoolapp.entity;
 
+import com.example.schoolapp.infrastructure.Auditable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,10 +14,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Indexed
-public class Person {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Person  extends Auditable {
+
     private String name;
     @Column(unique = true)
     private String email;

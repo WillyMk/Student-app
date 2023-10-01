@@ -51,6 +51,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student getStudentById(Long id) {
-        return studentRepo.findById(id).orElseThrow(() -> APIException.notFound("Student not found"));
+
+        return studentRepo.findById(id).orElseThrow(() -> APIException.notFound("Student not found" + id));
     }
 }

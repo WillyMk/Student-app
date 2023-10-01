@@ -16,10 +16,12 @@ public class ErrorObject {
     private HttpStatus statusCode;
     private String message;
     private Date timeStamp;
+    private String code;
 
     public ErrorObject(HttpStatus httpStatus, String format) {
         this.statusCode= httpStatus;
-        this.setMessage(httpStatus.getReasonPhrase());
+        this.code= String.valueOf(httpStatus.value());
+        this.setMessage(format);
     }
 
 }

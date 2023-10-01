@@ -12,18 +12,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Student{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    @Column(unique = true)
-    private String email;
-    private String mobile;
-    private String primaryContact;
-    private int age;
-    private String residence;
-    private int idNumber;
+public class Student extends Person {
+
+
     @Embedded
     private Guardian guardian;
     @ManyToMany(mappedBy = "students", cascade = CascadeType.ALL)
@@ -32,7 +23,7 @@ public class Student{
     public StudentDto toData () {
         StudentDto studentDto = new StudentDto();
         studentDto.setEmail(this.getEmail());
-        studentDto.setId(this.getId());
+//        studentDto.setId(this.getId());
         studentDto.setName(this.getName());
         studentDto.setResidence(this.getResidence());
         studentDto.setIdNumber(this.getIdNumber());
