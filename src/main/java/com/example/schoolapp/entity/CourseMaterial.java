@@ -1,5 +1,6 @@
 package com.example.schoolapp.entity;
 
+import com.example.schoolapp.dto.CourseMaterialDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,8 +15,17 @@ public class CourseMaterial {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Long pages;
+    private String pages;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private Course course;
+
+    public CourseMaterialDto toData(){
+        CourseMaterialDto c = new CourseMaterialDto();
+        c.setId(this.getId());
+        c.setName(this.getName());
+        c.setPages(this.getPages());
+        c.setCourseName(this.getCourse().getName());
+        return c;
+    }
 }

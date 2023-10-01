@@ -23,10 +23,11 @@ public class Teacher {
 
     public TeacherDto toData(){
         TeacherDto dto = new TeacherDto();
+        dto.setId(this.getId());
         dto.setMail(this.getMail());
         dto.setName(this.getName());
         dto.setResidence(this.getResidence());
-        if(this.getCourses().size() > 0){
+        if(this.getCourses() != null){
             dto.setCourseList(this.getCourses());
         }
         return dto;

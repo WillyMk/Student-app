@@ -10,9 +10,20 @@ import java.util.List;
 
 @Entity
 @Data
-@Indexed
-@Inheritance(strategy = InheritanceType.JOINED) // Use a separate table for each subclass
-public class Student extends Person{
+@AllArgsConstructor
+@NoArgsConstructor
+public class Student{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    @Column(unique = true)
+    private String email;
+    private String mobile;
+    private String primaryContact;
+    private int age;
+    private String residence;
+    private int idNumber;
     @Embedded
     private Guardian guardian;
     @ManyToMany(mappedBy = "students", cascade = CascadeType.ALL)
@@ -28,10 +39,16 @@ public class Student extends Person{
         studentDto.setPrimaryContact(this.getPrimaryContact());
         studentDto.setAge(this.getAge());
         studentDto.setMobile(this.getMobile());
-        studentDto.setGuardianName(this.getGuardian().getGuardianName());
-        studentDto.setGuardianContact(this.getGuardian().getGuardianContact());
-        studentDto.setGuardianEmail(this.getGuardian().getGuardianEmail());
-        studentDto.setCourses(this.getCourses());
+        if(this.getGuardian() != null) {
+            studentDto.setGuardianName(this.getGuardian().getGuardianName());
+            studentDto.setGuardianContact(this.getGuardian().getGuardianContact());
+            studentDto.setGuardianEmail(this.getGuardian().getGuardianEmail());
+        }
+        List<String> studentCourses = new ArrayList<>();
+        for(Course c : this.getCourses()){
+            studentCourses.add(c.getName());
+        }
+        studentDto.setCourseNames(studentCourses);
         return studentDto;
     }
 }

@@ -40,4 +40,10 @@ public class TeacherController {
         content.setTotalElements(teachers.getTotalElements());
         return ResponseEntity.status(HttpStatus.OK).body(content);
     }
+
+    @GetMapping("teacher/{id}")
+    public ResponseEntity<?> getTeacherById(@PathVariable Long id) {
+        TeacherDto teacherDto = teacherService.getTeacherById(id).toData();
+        return ResponseEntity.status(HttpStatus.OK).body(teacherDto);
+    }
 }

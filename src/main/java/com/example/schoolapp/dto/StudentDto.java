@@ -18,4 +18,5 @@ public class StudentDto {
     private String guardianEmail;
     private String guardianContact;
     private List<Course> courses;
+    private List<String> courseNames;
 }

@@ -1,5 +1,6 @@
 package com.example.schoolapp.entity;
 
+import com.example.schoolapp.dto.CourseDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,5 +37,27 @@ public class Course {
     }
     public void addStudent(Student student){
         students.add(student);
+    }
+
+    public CourseDto toData(){
+        CourseDto courseDto = new CourseDto();
+        courseDto.setId(this.getId());
+        courseDto.setName(this.getName());
+        courseDto.setCode(this.getCode());
+        if(this.getCourseMaterial() != null) {
+            courseDto.setMaterialName(this.getCourseMaterial().getName());
+        }
+        if(this.getTeacher() != null) {
+            courseDto.setTeacherName(this.getTeacher().getName());
+        }
+//        List<String> studentsName = new ArrayList<>();
+//        for(Student s = this.getStudents()){
+//            studentsName.add(s.getName());
+//        }
+        List<String> studentsName = this.getStudents().stream()
+                .map(Student::getName).toList();
+
+        courseDto.setStudentNames(studentsName);
+        return courseDto;
     }
 }

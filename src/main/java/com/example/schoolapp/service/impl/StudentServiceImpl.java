@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.security.Guard;
 
-@Service
 @RequiredArgsConstructor
+@Service
 @Slf4j
 @Transactional
 public class StudentServiceImpl implements StudentService {

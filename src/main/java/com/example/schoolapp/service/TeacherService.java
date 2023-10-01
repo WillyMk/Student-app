@@ -11,4 +11,6 @@ public interface TeacherService {
     Teacher saveTeacher(TeacherDto teacherDto);
 
     Page<Teacher> getTeachers(Pageable pageable);
+
+    Teacher getTeacherById(Long id);
 }
